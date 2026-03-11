@@ -12,7 +12,7 @@
 * **Дизайн:** Figma
 
 ## 🛠 Мови програмування
-* **Backend:** Java
+* **Backend:** Java / Spring Boot Framework
 * **Frontend:** HTML / CSS
 
 ## 📄 Опис проєкту
