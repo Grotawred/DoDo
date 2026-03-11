@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДоДо — Твій менеджер завдань</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-icon">✓</span>
+            <span>ДоДо</span>
+        </div>
+        <nav>
+            <a th:href="@{/login}" class="nav-link">Увійти</a>
+            <a th:href="@{/register}" class="btn-nav">Реєстрація</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">✦ Керуй своїм часом</span>
+            <h1>Завдання під<br>контролем</h1>
+            <p>
+                Організовуй справи по категоріях, створюй списки та відстежуй прогрес —
+                все в одному мінімалістичному просторі.
+            </p>
+            <div class="cta-row">
+                <a th:href="@{/register}" class="btn-primary">Почати безкоштовно →</a>
+                <a th:href="@{/login}" class="btn-ghost">Вже маю акаунт</a>
+            </div>
+            <div class="features">
+                <div class="feature">📂 Категорії</div>
+                <div class="feature">✅ Списки завдань</div>
+                <div class="feature">🔒 Безпечно</div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="app-preview">
+                <div class="preview-header">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="preview-title">ДоДо</span>
+                </div>
+                <div class="preview-body">
+                    <div class="preview-sidebar">
+                        <div class="ps-item active">🗂 Усі списки</div>
+                        <div class="ps-item">💼 Робота</div>
+                        <div class="ps-item">📚 Навчання</div>
+                        <div class="ps-item">🛒 Покупки</div>
+                    </div>
+                    <div class="preview-tasks">
+                        <p class="pt-title">Навчання</p>
+                        <div class="pt-item">◯ Прочитати розділ 3</div>
+                        <div class="pt-item done">◯ Виконати домашнє завдання</div>
+                        <div class="pt-item">◯ Повторити лекцію</div>
+                        <div class="pt-add">+ Нове завдання…</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
