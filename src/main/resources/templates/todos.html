@@ -101,23 +101,41 @@
                     <p>Жодного завдання. Додайте перше! 👇</p>
                 </div>
 
+
                 <ul class="task-list" th:if="${!#sets.isEmpty(activeList.tasks)}">
-                    <li th:each="task : ${activeList.tasks}" class="task-item">
-                        <span class="task-check">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/></svg>
-                        </span>
+                    <li th:each="task : ${activeList.tasks}"
+                        class="task-item"
+                        th:classappend="${task.completed} ? 'task-done' : ''">
+
+                        <form th:action="@{/tasks/{id}/toggle(id=${task.id})}" method="post" class="toggle-form">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <input type="hidden" name="listId" th:value="${activeList.id}" />
+
+                            <button type="submit" class="task-check-btn">
+                                <svg th:if="${!task.completed}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <circle cx="12" cy="12" r="10"/>
+                                </svg>
+                                <svg th:if="${task.completed}" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="2.5">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </button>
+                        </form>
+
                         <span class="task-title" th:text="${task.title}"></span>
+
                         <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" class="inline-form">
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                             <input type="hidden" name="listId" th:value="${activeList.id}" />
                             <button type="submit" class="delete-task-btn" title="Видалити завдання">
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                                </svg>
                             </button>
                         </form>
                     </li>
                 </ul>
             </div>
-
             <form class="add-task-form" action="/tasks" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <input type="hidden" name="listId" th:value="${activeList.id}" />

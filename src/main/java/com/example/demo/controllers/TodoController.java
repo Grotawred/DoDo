@@ -17,12 +17,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequiredArgsConstructor
 public class TodoController {
 
     private final ListRepository listRepository;
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+
+
+    public TodoController(ListRepository listRepository, TaskRepository taskRepository, UserRepository userRepository) {
+        this.listRepository = listRepository;
+        this.taskRepository = taskRepository;
+        this.userRepository = userRepository;
+    }
 
     @GetMapping("/")
     public String todos(@AuthenticationPrincipal CustomUserDetails userDetails,
@@ -108,6 +114,22 @@ public class TodoController {
         taskRepository.findById(taskId).ifPresent(task -> {
             if (task.getTodoList().getUser().getId().equals(user.getId())) {
                 taskRepository.delete(task);
+            }
+        });
+
+        return "redirect:/?listId=" + listId;
+    }
+
+    @PostMapping("/tasks/{taskId}/toggle")
+    public String toggleTask(@AuthenticationPrincipal CustomUserDetails userDetails,
+                             @PathVariable Long taskId,
+                             @RequestParam("listId") Long listId) {
+        User user = userRepository.findByLogin(userDetails.getUsername()).orElseThrow();
+
+        taskRepository.findById(taskId).ifPresent(task -> {
+            if (task.getTodoList().getUser().getId().equals(user.getId())) {
+                task.setCompleted(!task.isCompleted());
+                taskRepository.save(task);
             }
         });
 
