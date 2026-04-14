@@ -10,6 +10,8 @@
 * **IDE:** IntelliJ IDEA Community Edition, Visual Studio Code
 * **Робота з БД:** MySQL Workbench, [drawsql.app](https://drawsql.app)
 * **Дизайн:** Figma
+* **Сервер:** AWS, DuckDNS
+* **Контейнер:** Docker, Terraform
 
 ## 🛠 Мови програмування
 * **Backend:** Java / Spring Boot Framework
